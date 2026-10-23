@@ -1,0 +1,135 @@
+/* ====================
+   DESKTOP
+   ==================== */
+@media (min-width: 769px) {
+    .result-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ====================
+   TABLET
+   ==================== */
+@media (max-width: 768px) {
+    .screen {
+        padding-block: var(--space-6);
+    }
+
+    .hero {
+        margin-bottom: var(--space-6);
+    }
+
+    .hero__title {
+        font-size: var(--font-size-xl);
+    }
+
+    .hero__subtitle {
+        font-size: var(--font-size-sm);
+    }
+
+    .card {
+        padding: var(--space-5);
+    }
+
+    .game-stats {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2);
+    }
+
+    .question-or-title {
+        font-size: var(--font-size-md);
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group .btn {
+        width: 100%;
+    }
+
+    .leaderboard-table {
+        font-size: var(--font-size-xs);
+    }
+
+    .leaderboard-table th,
+    .leaderboard-table td {
+        padding: var(--space-2);
+    }
+}
+
+/* ====================
+   MOBILE
+   ==================== */
+@media (max-width: 480px) {
+    .container {
+        width: calc(100% - var(--space-6));
+    }
+
+    .screen {
+        padding-block: var(--space-4);
+    }
+
+    .hero__title {
+        font-size: var(--font-size-lg);
+    }
+
+    .card {
+        padding: var(--space-4);
+        border-radius: var(--radius-md);
+    }
+
+    .question {
+        gap: var(--space-4);
+    }
+
+    .question-or-title {
+        line-height: var(--line-height-normal);
+    }
+
+    .option {
+        padding: var(--space-3);
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .notification-container {
+        left: var(--space-3);
+        bottom: var(--space-3);
+        margin-right: var(--space-3);
+    }
+
+    .notification {
+        min-width: auto;
+    }
+
+    .sort-item {
+        padding: var(--space-3);
+    }
+
+    .sort-position {
+        width: 36px;
+        height: 36px;
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* ========================================
+   ORIENTACIÓN LANDSCAPE MÓVIL
+   ======================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .screen {
+        padding-block: var(--space-3);
+    }
+
+    .hero {
+        margin-bottom: var(--space-4);
+    }
+
+    .card {
+        padding: var(--space-4);
+    }
+}

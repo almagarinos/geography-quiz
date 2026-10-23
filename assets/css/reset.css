@@ -1,0 +1,75 @@
+/* ====================
+   TODO
+   ==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ====================
+   HTML
+   ==================== */
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* ====================
+   BODY
+   ==================== */
+body {
+    min-height: 100vh;
+}
+
+/* ====================
+   FORMULARIOS
+   ==================== */
+input {
+    font: inherit;
+    color: inherit;
+}
+
+/* ====================
+   BOTONES
+   ==================== */
+button {
+    font: inherit;
+    color: inherit;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+/* ====================
+   TABLAS
+   ==================== */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* ====================
+   ENCABEZADOS
+   ==================== */
+h1,
+h2 {
+    font: inherit;
+    font-weight: inherit;
+}
+
+/* ====================
+   FOCUS EN INPUT
+   ==================== */
+:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* ====================
+   SELECCIONES DE TEXTO
+   ==================== */
+::selection {
+    background-color: var(--color-gray-300);
+    color: #000000;
+}

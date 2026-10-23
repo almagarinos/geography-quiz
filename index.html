@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex, nofollow">
+        <title>Trivial Geográfico</title>
+        <meta name="description" content="Juego familiar con preguntas y respuestas de geografía.">
+
+        <!-- Estilos -->
+        <link rel="stylesheet" href="assets/css/reset.css">
+        <link rel="stylesheet" href="assets/css/variables.css">
+        <link rel="stylesheet" href="assets/css/layout.css">
+        <link rel="stylesheet" href="assets/css/components.css">
+        <link rel="stylesheet" href="assets/css/screens.css">
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="assets/icon/favicon.ico">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon-16x16.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/icon/apple-touch-icon.png">
+        <link rel="manifest" href="assets/icon/site.webmanifest">
+
+    </head>
+
+    <body>
+
+        <div id="app" class="app">
+
+            <!-- ================== -->
+            <!-- PANTALLA DE INICIO -->
+            <!-- ================== -->
+            <section id="start-screen" class="screen screen--active">
+
+                <div class="container">
+
+                    <header class="hero">
+
+                        <h1 class="hero__title">
+                            🌎 Trivial Geográfico 🌍
+                        </h1>
+
+                        <p class="hero__subtitle">
+                            Amplíe sus conocimientos de geografía jugando con ciudades, países y continentes.
+                        </p>
+
+                    </header>
+
+                    <div class="card">
+
+                        <div class="form-group">
+
+                            <label for="question-limit">
+                                Indique cuántas preguntas desea
+                            </label>
+
+                            <input id="question-limit" type="number" min="1" max="100" step="1"
+                                placeholder="Escriba un número entre 1 y 100" autocomplete="off">
+
+                        </div>
+
+                        <div class="button-group">
+
+                            <button id="start-game-btn" class="btn btn--primary" type="button">
+                                Empezar juego
+                            </button>
+
+                            <button id="show-leaderboard-btn" class="btn btn--secondary" type="button">
+                                Ver el top 20
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ================= -->
+            <!-- PANTALLA DE JUEGO -->
+            <!-- ================= -->
+            <section id="game-screen" class="screen">
+
+                <div class="container">
+
+                    <header class="game-header">
+
+                        <div id="progress-bar-container"></div>
+
+                        <div class="game-stats">
+
+                            <span id="question-counter">
+                                <!-- Render dinámico -->
+                            </span>
+
+                            <span id="question-progress">
+                                <!-- Render dinámico -->
+                            </span>
+
+                            <span id="score-counter">
+                                <!-- Render dinámico -->
+                            </span>
+
+                        </div>
+
+                    </header>
+
+                    <main class="question-area">
+
+                        <article id="question-container" class="card">
+                            <!-- Render dinámico -->
+                        </article>
+
+                    </main>
+
+                </div>
+
+            </section>
+
+            <!-- ====================== -->
+            <!-- PANTALLA DE RESULTADOS -->
+            <!-- ====================== -->
+            <section id="result-screen" class="screen">
+
+                <div class="container">
+
+                    <div class="card result-card">
+
+                        <h2 class="question-or-title">🎉 Partida finalizada</h2>
+
+                        <div id="result-summary">
+                            <!-- Render dinámico -->
+                        </div>
+
+                    </div>
+
+                    <div class="card">
+
+                        <div class="form-group">
+
+                            <label for="player-name">
+                                Guarde su resultado en el top 20
+                            </label>
+
+                            <input id="player-name" type="text" maxlength="30"
+                                placeholder="Introduzca su nombre" autocomplete="off">
+
+                        </div>
+
+                        <div class="button-group">
+
+                            <button id="save-score-btn" class="btn btn--primary" type="button">
+                                Guardar resultado
+                            </button>
+
+                            <button id="skip-save-btn" class="btn btn--secondary" type="button">
+                                Continuar sin guardar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- =================== -->
+            <!-- PANTALLA DEL TOP 20 -->
+            <!-- =================== -->
+            <section id="leaderboard-screen" class="screen">
+
+                <div class="container">
+
+                    <div class="card">
+
+                        <h2 class="question-or-title">🏆 Top 20</h2>
+
+                        <div id="leaderboard-container">
+                            <!-- Render dinámico -->
+                        </div>
+
+                        <div class="button-group">
+
+                            <button id="back-home-btn" class="btn btn--primary" type="button">
+                                Volver al inicio
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- ============== -->
+        <!-- NOTIFICACIONES -->
+        <!-- ============== -->
+        <div id="notification-container" class="notification-container"></div>
+
+        <!-- ============= -->
+        <!-- BASE DE DATOS -->
+        <!-- ============= -->
+        <script src="data/datos-ciudades.js"></script>
+
+        <!-- ======= -->
+        <!-- STORAGE -->
+        <!-- ======= -->
+        <script src="js/storage/local-storage.js"></script>
+
+        <!-- ===== -->
+        <!-- UTILS -->
+        <!-- ===== -->
+        <script src="js/utils/random.js"></script>
+        <script src="js/utils/array.js"></script>
+        <script src="js/utils/geo.js"></script>
+        <script src="js/utils/date.js"></script>
+        <script src="js/utils/validation.js"></script>
+
+        <!-- ===== -->
+        <!-- STATE -->
+        <!-- ===== -->
+        <script src="js/state/store.js"></script>
+
+        <!-- ======== -->
+        <!-- SERVICES -->
+        <!-- ======== -->
+        <script src="js/services/score-service.js"></script>
+        <script src="js/services/leaderboard-service.js"></script>
+        <script src="js/services/question-generator.js"></script>
+        <script src="js/services/quiz-service.js"></script>
+
+        <!-- ========== -->
+        <!-- COMPONENTS -->
+        <!-- ========== -->
+        <script src="js/components/progress-bar.js"></script>
+        <script src="js/components/notification.js"></script>
+        <script src="js/components/drag-sort.js"></script>
+
+        <!-- ========= -->
+        <!-- QUESTIONS -->
+        <!-- ========= -->
+        <script src="js/questions/binary-question.js"></script>
+        <script src="js/questions/single-choice-question.js"></script>
+        <script src="js/questions/multiple-choice-question.js"></script>
+        <script src="js/questions/text-question.js"></script>
+        <script src="js/questions/ordering-question.js"></script>
+
+        <!-- ===== -->
+        <!-- VIEWS -->
+        <!-- ===== -->
+        <script src="js/views/start-view.js"></script>
+        <script src="js/views/question-view.js"></script>
+        <script src="js/views/result-view.js"></script>
+        <script src="js/views/leaderboard-view.js"></script>
+
+        <!-- =========== -->
+        <!-- ENTRY POINT -->
+        <!-- =========== -->
+        <script src="js/main.js"></script>
+
+    </body>
+
+</html>
