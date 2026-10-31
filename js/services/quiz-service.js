@@ -206,6 +206,18 @@ window.QuizService = (() => {
         return Store.getState().answers;
     }
 
+    /**
+     * Subimos hasta arriba para leer bien la pregunta si venimos de una
+     * respuesta o pantalla anterior, útil para mobile. El setTimeout da
+     * tiempo a los iPhone a procesar el clic del botón antes de hacer
+     * scroll, es un bug de iOS.
+     */
+    function scrollToTop() {
+        setTimeout(() => {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }, 10);
+    }
+
     return {
         startGame,
         getCurrentQuestion,
@@ -221,5 +233,6 @@ window.QuizService = (() => {
         getProgress,
         getGameStats,
         getAnswers,
+        scrollToTop,
     };
 })();

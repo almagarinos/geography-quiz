@@ -42,7 +42,7 @@ body {
 .hero {
     text-align: center;
     margin-bottom: var(--space-8);
-    color: var(--color-gray-300);
+    color: var(--color-gray-100);
 }
 
 .hero__title {

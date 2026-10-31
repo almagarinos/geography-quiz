@@ -146,8 +146,21 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     background-color: var(--color-white);
-    touch-action: none;
     cursor: grab;
+}
+
+.sort-item, .sort-item * {
+    /* Evita la selección de texto al mantener pulsada la pantalla */
+    touch-action: none;
+
+    /* Desactiva el menú contextual/lupa de selección en iOS */
+    -webkit-touch-callout: none; 
+    
+    /* Desactiva la selección de texto en todos los navegadores */
+    -webkit-user-select: none;  /* Safari e iOS */
+    -moz-user-select: none;     /* Firefox viejo */
+    -ms-user-select: none;      /* IE/Edge */
+    user-select: none;          /* Estándar moderno */
 }
 
 .sort-item:active {

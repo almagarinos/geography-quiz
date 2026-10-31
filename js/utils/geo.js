@@ -33,7 +33,7 @@ window.GeoUtils = (() => {
             return "sur";
         }
 
-        return "ecuador";
+        return "ecuador terrestre";
     }
 
     // Devuelve el nombre del hemisferio según la longitud
@@ -51,7 +51,7 @@ window.GeoUtils = (() => {
         return "meridiano de Greenwich";
     }
 
-    // Determina si una ciudad es capital de su país
+    // Determina si una ciudad es capital de país
     function isCapital(city) {
         return Boolean(city?.esCapitalDePais === true);
     }

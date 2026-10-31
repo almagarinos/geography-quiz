@@ -100,7 +100,7 @@ window.BinaryQuestion = (() => {
         return {
             id: RandomUtils.generateId("binary"),
             type: "binary",
-            statement: `¿${city.nombre} está en el hemisferio norte?`,
+            statement: `Indique si ${city.nombre} está en el hemisferio norte (al norte del ecuador terrestre).`,
             options: ["Sí", "No"],
             correctAnswer: GeoUtils.isNorthernHemisphere(city.coordenada.latitud) ? "Sí" : "No",
             metadata: {
@@ -116,7 +116,7 @@ window.BinaryQuestion = (() => {
         return {
             id: RandomUtils.generateId("binary"),
             type: "binary",
-            statement: `¿${city.nombre} está en el hemisferio sur?`,
+            statement: `Indique si ${city.nombre} está en el hemisferio sur (al sur del ecuador terrestre).`,
             options: ["Sí", "No"],
             correctAnswer: GeoUtils.isSouthernHemisphere(city.coordenada.latitud) ? "Sí" : "No",
             metadata: {
@@ -124,7 +124,38 @@ window.BinaryQuestion = (() => {
             },
         };
     }
-    // OJO: Se podrían añadir más preguntas de si una ciudad pertenece al hemisferio este u oeste.
+
+    // Pertenencia al hemisferio este
+    function easternHemisphereQuestion(cities) {
+        const city = RandomUtils.pick(cities);
+
+        return {
+            id: RandomUtils.generateId("binary"),
+            type: "binary",
+            statement: `Indique si ${city.nombre} está en el hemisferio este (al este del meridiano de Greenwich).`,
+            options: ["Sí", "No"],
+            correctAnswer: GeoUtils.isEasternHemisphere(city.coordenada.longitud) ? "Sí" : "No",
+            metadata: {
+                city,
+            },
+        };
+    }
+
+    // Pertenencia al hemisferio oeste
+    function westernHemisphereQuestion(cities) {
+        const city = RandomUtils.pick(cities);
+
+        return {
+            id: RandomUtils.generateId("binary"),
+            type: "binary",
+            statement: `Indique si ${city.nombre} está en el hemisferio oeste (al oeste del meridiano de Greenwich).`,
+            options: ["Sí", "No"],
+            correctAnswer: GeoUtils.isWesternHemisphere(city.coordenada.longitud) ? "Sí" : "No",
+            metadata: {
+                city,
+            },
+        };
+    }
 
     // Comparación norte / sur
     function northOfQuestion(cities) {
@@ -148,6 +179,28 @@ window.BinaryQuestion = (() => {
         };
     }
 
+    // Comparación sur / norte
+    function southOfQuestion(cities) {
+        const selected = RandomUtils.pickMany(cities, 2);
+
+        const cityA = selected[0];
+        const cityB = selected[1];
+
+        const isSouth = Number(cityA.coordenada.latitud) < Number(cityB.coordenada.latitud);
+
+        return {
+            id: RandomUtils.generateId("binary"),
+            type: "binary",
+            statement: `¿${cityA.nombre} está más al sur que ${cityB.nombre}?`,
+            options: ["Sí", "No"],
+            correctAnswer: isSouth ? "Sí" : "No",
+            metadata: {
+                cityA,
+                cityB,
+            },
+        };
+    }
+
     // Comparación este / oeste
     function eastOfQuestion(cities) {
         const selected = RandomUtils.pickMany(cities, 2);
@@ -160,9 +213,31 @@ window.BinaryQuestion = (() => {
         return {
             id: RandomUtils.generateId("binary"),
             type: "binary",
-            statement: `¿${cityA.nombre} está más al este que ${cityB.nombre}?`,
+            statement: `Indique si ${cityA.nombre} está más al este que ${cityB.nombre} (respecto al meridiano de Greenwich).`,
             options: ["Sí", "No"],
             correctAnswer: isEast ? "Sí" : "No",
+            metadata: {
+                cityA,
+                cityB,
+            },
+        };
+    }
+
+    // Comparación oeste / este
+    function westOfQuestion(cities) {
+        const selected = RandomUtils.pickMany(cities, 2);
+
+        const cityA = selected[0];
+        const cityB = selected[1];
+
+        const isWest = Number(cityA.coordenada.longitud) < Number(cityB.coordenada.longitud);
+
+        return {
+            id: RandomUtils.generateId("binary"),
+            type: "binary",
+            statement: `Indique si ${cityA.nombre} está más al oeste que ${cityB.nombre} (respecto al meridiano de Greenwich).`,
+            options: ["Sí", "No"],
+            correctAnswer: isWest ? "Sí" : "No",
             metadata: {
                 cityA,
                 cityB,
@@ -178,8 +253,12 @@ window.BinaryQuestion = (() => {
             countryQuestion,
             northernHemisphereQuestion,
             southernHemisphereQuestion,
+            easternHemisphereQuestion,
+            westernHemisphereQuestion,
             northOfQuestion,
+            southOfQuestion,
             eastOfQuestion,
+            westOfQuestion,
         ];
 
         const generator = RandomUtils.pick(generators);
@@ -194,7 +273,11 @@ window.BinaryQuestion = (() => {
         countryQuestion,
         northernHemisphereQuestion,
         southernHemisphereQuestion,
+        easternHemisphereQuestion,
+        westernHemisphereQuestion,
         northOfQuestion,
+        southOfQuestion,
         eastOfQuestion,
+        westOfQuestion,
     };
 })();

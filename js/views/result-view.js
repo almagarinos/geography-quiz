@@ -91,7 +91,9 @@ window.ResultView = (() => {
         RESULT_SCREEN.classList.add("screen--active");
 
         PLAYER_NAME_INPUT.value = "";
-        PLAYER_NAME_INPUT.focus();
+
+        // OJO al focus del input, en mobile no es ideal
+        //PLAYER_NAME_INPUT.focus();
     }
 
     // Navega al leaderboard
@@ -114,13 +116,16 @@ window.ResultView = (() => {
         if (!ValidationUtils.isValidPlayerName(playerName)) {
             Notification.warning("Introduzca un nombre válido.");
 
-            PLAYER_NAME_INPUT.focus();
+            // OJO al focus del input, en mobile no es ideal
+            //PLAYER_NAME_INPUT.focus();
 
             return;
         }
 
         try {
             QuizService.saveResult(playerName);
+
+            QuizService.scrollToTop();
 
             Notification.success("Resultado guardado correctamente.");
 

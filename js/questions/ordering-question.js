@@ -39,7 +39,8 @@ window.OrderingQuestion = (() => {
         );
 
         return buildQuestion(
-            "Ordene las siguientes ciudades de norte a sur (mantenga pulsado y arrastre):",
+            "Ordene las siguientes ciudades de norte a sur "
+                + "(mantenga pulsado y arrastre para reordenar):",
             selected.map(
                 (city) => city.nombre + " (" + city.pais + ")"
             ),
@@ -60,7 +61,8 @@ window.OrderingQuestion = (() => {
         );
 
         return buildQuestion(
-            "Ordene las siguientes ciudades de sur a norte (mantenga pulsado y arrastre):",
+            "Ordene las siguientes ciudades de sur a norte "
+                + "(mantenga pulsado y arrastre para reordenar):",
             selected.map(
                 (city) => city.nombre + " (" + city.pais + ")"
             ),
@@ -81,7 +83,8 @@ window.OrderingQuestion = (() => {
         );
 
         return buildQuestion(
-            "Ordene las siguientes ciudades de oeste a este (mantenga pulsado y arrastre):",
+            "Ordene las siguientes ciudades de oeste a este "
+                + "(mantenga pulsado y arrastre para reordenar):",
             selected.map(
                 (city) => city.nombre + " (" + city.pais + ")"
             ),
@@ -102,7 +105,8 @@ window.OrderingQuestion = (() => {
         );
 
         return buildQuestion(
-            "Ordene las siguientes ciudades de este a oeste (mantenga pulsado y arrastre):",
+            "Ordene las siguientes ciudades de este a oeste "
+                + "(mantenga pulsado y arrastre para reordenar):",
             selected.map(
                 (city) => city.nombre + " (" + city.pais + ")"
             ),

@@ -105,6 +105,12 @@ window.DragSort = (() => {
             let draggedIndex = null;
 
             items.forEach((element) => {
+
+                // La siguiente instrucción evita que se seleccione el texto o haya zoom o scroll
+                element.addEventListener('touchstart', function(e) {
+                    e.preventDefault(); 
+                }, { passive: false }); // Es obligatorio para poder usar preventDefault()
+
                 element.addEventListener("pointerdown", (event) => {
                     startY = event.clientY;
 

@@ -40,7 +40,7 @@ window.MultipleChoiceQuestion = (() => {
         const options = [...correct, ...incorrect];
 
         return buildQuestion(
-            "¿Qué dos ciudades están en el hemisferio norte?",
+            "Indique qué dos ciudades están en el hemisferio norte (al norte del ecuador terrestre).",
             options.map((city) => city.nombre),
             correct.map((city) => city.nombre),
             {
@@ -59,7 +59,7 @@ window.MultipleChoiceQuestion = (() => {
         const options = [...correct, ...incorrect];
 
         return buildQuestion(
-            "¿Qué dos ciudades están en el hemisferio sur?",
+            "Indique qué dos ciudades están en el hemisferio sur (al sur del ecuador terrestre).",
             options.map((city) => city.nombre),
             correct.map((city) => city.nombre),
             {
@@ -78,7 +78,7 @@ window.MultipleChoiceQuestion = (() => {
         const options = [...correct, ...incorrect];
 
         return buildQuestion(
-            "¿Qué dos ciudades están en el hemisferio este?",
+            "Indique qué dos ciudades están en el hemisferio este (al este del meridiano de Greenwich).",
             options.map((city) => city.nombre),
             correct.map((city) => city.nombre),
             {
@@ -97,7 +97,7 @@ window.MultipleChoiceQuestion = (() => {
         const options = [...correct, ...incorrect];
 
         return buildQuestion(
-            "¿Qué dos ciudades están en el hemisferio oeste?",
+            "Indique qué dos ciudades están en el hemisferio oeste (al oeste del meridiano de Greenwich).",
             options.map((city) => city.nombre),
             correct.map((city) => city.nombre),
             {
@@ -108,7 +108,7 @@ window.MultipleChoiceQuestion = (() => {
 
     // OJO: las cuatro funciones anteriores se podrían refactorizar mejor.
 
-    // Cuáles son capitales de su país
+    // Cuáles son capitales de país
     function capitalsQuestion(cities) {
         const capitals = GeoUtils.getCapitals(cities);
         const nonCapitals = cities.filter((city) => !GeoUtils.isCapital(city));
@@ -118,7 +118,7 @@ window.MultipleChoiceQuestion = (() => {
         const options = [...correct, ...incorrect];
 
         return buildQuestion(
-            "¿Qué dos ciudades son capitales de su país?",
+            "¿Qué dos ciudades son capitales de país?",
             options.map((city) => city.nombre),
             correct.map((city) => city.nombre),
             {

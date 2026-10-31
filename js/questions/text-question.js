@@ -36,48 +36,65 @@ window.TextQuestion = (() => {
 
         const city = RandomUtils.pick(capitals);
 
-        return buildQuestion(`¿Cuál es la capital de ${city.pais}?`, "Escriba el nombre de la ciudad", city.nombre, {
-            city,
-        });
-    }
-
-    // ¿De qué país es una ciudad?
-    function countryQuestion(cities) {
-        const city = RandomUtils.pick(cities);
-
-        return buildQuestion(`¿De qué país es ${city.nombre}?`, "Escriba el nombre del país", city.pais, {
-            city,
-        });
-    }
-
-    // ¿A qué continente pertenece una ciudad?
-    function continentQuestion(cities) {
-        const city = RandomUtils.pick(cities);
-
         return buildQuestion(
-            `¿A qué continente pertenece ${city.nombre}?`,
-            "Escriba el nombre del continente",
-            city.continente,
+            `¿Cuál es la capital de ${city.pais}?`,
+            "Escriba el nombre de la ciudad",
+            city.nombre,
             {
                 city,
             }
         );
     }
 
-    // OJO: también se podría preguntar "¿A qué continente pertenece un país?".
-
-    // ¿Qué ciudad es la capital de un país?
-    function cityCapitalQuestion(cities) {
-        const capitals = GeoUtils.getCapitals(cities);
-
-        const city = RandomUtils.pick(capitals);
+    // ¿A qué país pertenece una ciudad?
+    function countryQuestion(cities) {
+        const city = RandomUtils.pick(cities);
 
         return buildQuestion(
-            `¿Qué ciudad es la capital de ${city.pais}?`,
-            "Escriba el nombre de la ciudad",
-            city.nombre,
+            `¿A qué país pertenece ${city.nombre}?`,
+            "Escriba el nombre del país",
+            city.pais,
             {
                 city,
+            }
+        );
+    }
+
+    // ¿A qué continente pertenece una ciudad?
+    function continentCityQuestion(cities) {
+        const city = RandomUtils.pick(cities);
+
+        const continent = city.continente;
+
+        return buildQuestion(
+            `¿A qué continente pertenece ${city.nombre}?`,
+            "Escriba el nombre del continente",
+            continent,
+            {
+                city,
+                continent,
+            }
+        );
+    }
+
+    /**
+     * ¿A qué continente pertenece un país? OJO: esto
+     * merece optimizar la equiprobabilidad de países.
+     */
+    function continentCountryQuestion(cities) {
+        const city = RandomUtils.pick(cities);
+
+        const country = city.pais;        
+
+        const continent = city.continente;
+
+        return buildQuestion(
+            `¿A qué continente pertenece ${country}?`,
+            "Escriba el nombre del continente",
+            continent,
+            {
+                country,
+                continent,
             }
         );
     }
@@ -89,7 +106,7 @@ window.TextQuestion = (() => {
         const correctAnswer = GeoUtils.getLatitudeHemisphere(city.coordenada.latitud);
 
         return buildQuestion(
-            `¿En qué hemisferio se encuentra ${city.nombre} según su latitud?`,
+            `Indique en qué hemisferio se encuentra ${city.nombre} según su latitud (respecto al ecuador terrestre).`,
             "Escriba norte o sur",
             correctAnswer,
             {
@@ -105,7 +122,7 @@ window.TextQuestion = (() => {
         const correctAnswer = GeoUtils.getLongitudeHemisphere(city.coordenada.longitud);
 
         return buildQuestion(
-            `¿En qué hemisferio se encuentra ${city.nombre} según su longitud?`,
+            `Indique en qué hemisferio se encuentra ${city.nombre} según su longitud (respecto al meridiano de Greenwich).`,
             "Escriba este u oeste",
             correctAnswer,
             {
@@ -135,6 +152,27 @@ window.TextQuestion = (() => {
         );
     }
 
+    // Ciudad más al sur entre dos
+    function southernCityQuestion(cities) {
+        const selected = RandomUtils.pickMany(cities, 2);
+
+        const cityA = selected[0];
+        const cityB = selected[1];
+
+        const correctAnswer =
+            Number(cityA.coordenada.latitud) < Number(cityB.coordenada.latitud) ? cityA.nombre : cityB.nombre;
+
+        return buildQuestion(
+            `¿Qué ciudad está más al sur: ${cityA.nombre} o ${cityB.nombre}?`,
+            "Escriba el nombre de la ciudad",
+            correctAnswer,
+            {
+                cityA,
+                cityB,
+            }
+        );
+    }
+
     // Ciudad más al este entre dos
     function easternCityQuestion(cities) {
         const selected = RandomUtils.pickMany(cities, 2);
@@ -146,7 +184,28 @@ window.TextQuestion = (() => {
             Number(cityA.coordenada.longitud) > Number(cityB.coordenada.longitud) ? cityA.nombre : cityB.nombre;
 
         return buildQuestion(
-            `¿Qué ciudad está más al este: ${cityA.nombre} o ${cityB.nombre}?`,
+            `¿Qué ciudad está más al este respecto al meridiano de Greenwich: ${cityA.nombre} o ${cityB.nombre}?`,
+            "Escriba el nombre de la ciudad",
+            correctAnswer,
+            {
+                cityA,
+                cityB,
+            }
+        );
+    }
+
+    // Ciudad más al oeste entre dos
+    function westernCityQuestion(cities) {
+        const selected = RandomUtils.pickMany(cities, 2);
+
+        const cityA = selected[0];
+        const cityB = selected[1];
+
+        const correctAnswer =
+            Number(cityA.coordenada.longitud) < Number(cityB.coordenada.longitud) ? cityA.nombre : cityB.nombre;
+
+        return buildQuestion(
+            `¿Qué ciudad está más al oeste respecto al meridiano de Greenwich: ${cityA.nombre} o ${cityB.nombre}?`,
             "Escriba el nombre de la ciudad",
             correctAnswer,
             {
@@ -166,12 +225,14 @@ window.TextQuestion = (() => {
         const generators = [
             capitalQuestion,
             countryQuestion,
-            continentQuestion,
-            cityCapitalQuestion,
+            continentCityQuestion,
+            continentCountryQuestion,
             latitudeHemisphereQuestion,
             longitudeHemisphereQuestion,
             northernCityQuestion,
+            southernCityQuestion,
             easternCityQuestion,
+            westernCityQuestion,
         ];
 
         const generator = RandomUtils.pick(generators);
@@ -184,11 +245,13 @@ window.TextQuestion = (() => {
         validateAnswer,
         capitalQuestion,
         countryQuestion,
-        continentQuestion,
-        cityCapitalQuestion,
+        continentCityQuestion,
+        continentCountryQuestion,
         latitudeHemisphereQuestion,
         longitudeHemisphereQuestion,
         northernCityQuestion,
+        southernCityQuestion,
         easternCityQuestion,
+        westernCityQuestion,
     };
 })();

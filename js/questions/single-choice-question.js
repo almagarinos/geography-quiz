@@ -157,7 +157,7 @@ window.SingleChoiceQuestion = (() => {
         );
 
         return buildQuestion(
-            "¿Cuál de estas ciudades está más al este?",
+            "Indique cuál de estas ciudades está más al este (respecto al meridiano de Greenwich).",
             options.map((city) => city.nombre),
             correctCity.nombre,
             {
@@ -175,7 +175,7 @@ window.SingleChoiceQuestion = (() => {
         );
 
         return buildQuestion(
-            "¿Cuál de estas ciudades está más al oeste?",
+            "Indique cuál de estas ciudades está más al oeste (respecto al meridiano de Greenwich).",
             options.map((city) => city.nombre),
             correctCity.nombre,
             {

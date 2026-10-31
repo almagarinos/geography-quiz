@@ -38,6 +38,8 @@ window.QuestionView = (() => {
          */
         document.getElementById("confirm-answer-btn").disabled = true;
 
+        QuizService.scrollToTop();
+
         setTimeout(() => {
             if (QuizService.hasNextQuestion()) {
                 QuizService.nextQuestion();
@@ -233,7 +235,8 @@ window.QuestionView = (() => {
 
         const input = document.getElementById("text-answer");
 
-        input?.focus();
+        // OJO al focus del input, en mobile no es ideal
+        //input?.focus();
 
         document.getElementById("confirm-answer-btn")?.addEventListener("click", () => {
             const value = input.value.trim();

@@ -49,6 +49,14 @@
         width: 100%;
     }
 
+    .result-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .result-item__value {
+        font-size: var(--font-size-md);
+    }
+
     .leaderboard-table {
         font-size: var(--font-size-xs);
     }
@@ -92,10 +100,6 @@
         padding: var(--space-3);
     }
 
-    .result-grid {
-        grid-template-columns: 1fr;
-    }
-
     .notification-container {
         left: var(--space-3);
         bottom: var(--space-3);
@@ -131,5 +135,14 @@
 
     .card {
         padding: var(--space-4);
+    }
+}
+
+/* ====================
+   MOBILE MUY ANTIGUO
+   ==================== */
+@media (max-width: 300px) {
+    .result-grid {
+        grid-template-columns: 1fr;
     }
 }

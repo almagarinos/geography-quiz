@@ -17,6 +17,11 @@ window.StartView = (() => {
     const START_BUTTON = document.getElementById("start-game-btn");
     const SHOW_LEADERBOARD_BUTTON = document.getElementById("show-leaderboard-btn");
 
+    // Limpia el formulario.
+    function resetForm() {
+        QUESTION_LIMIT_INPUT.value = "";
+    }
+
     // Oculta todas las pantallas
     function hideAllScreens() {
         document.querySelectorAll(".screen").forEach((screen) => {
@@ -26,6 +31,10 @@ window.StartView = (() => {
 
     // Muestra la pantalla de inicio
     function show() {
+        QuizService.scrollToTop();
+        
+        resetForm();
+
         hideAllScreens();
 
         START_SCREEN.classList.add("screen--active");
@@ -36,11 +45,6 @@ window.StartView = (() => {
     // Obtiene el valor introducido
     function getQuestionLimit() {
         return Number(QUESTION_LIMIT_INPUT.value);
-    }
-
-    // Limpia el formulario. OJO: de momento no se usa, pero será útil.
-    function resetForm() {
-        QUESTION_LIMIT_INPUT.value = "";
     }
 
     // Inicia la partida, donde "ciudades" es el nombre de la constante en datos-ciudades.js
@@ -104,7 +108,6 @@ window.StartView = (() => {
 
     return {
         show,
-        resetForm,
         init,
     };
 })();
