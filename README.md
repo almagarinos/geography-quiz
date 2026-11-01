@@ -3,7 +3,7 @@
 Juego familiar, inspirado en el popular juego de mesa "Trivial Pursuit", donde hay que acertar preguntas de geografía sobre ciudades, países y continentes.
 
 
-## 📈 Versión 1.0.0
+## 📈 Versión 1.0.1
 
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000) ![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff)
 

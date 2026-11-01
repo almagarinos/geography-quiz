@@ -30,6 +30,22 @@ window.TextQuestion = (() => {
         };
     }
 
+    /**
+     * Devuelve la conjunción "o", pero si la inicial de
+     * la siguiente ciudad suena a "o", entoces evita la
+     * cacofonía y devuelve la conjunción "u". Ejemplos:
+     * "o Madrid", "u Oviedo", "u Oporto", "u Oslo"...
+     */
+    function setConjuntion(cityName){
+        let conjuntion = "o";
+
+        if (cityName.substring(0,1) === 'O') {
+            conjuntion = "u";
+        }
+
+        return conjuntion;
+    }
+
     // ¿Cuál es la capital de un país?
     function capitalQuestion(cities) {
         const capitals = GeoUtils.getCapitals(cities);
@@ -142,7 +158,7 @@ window.TextQuestion = (() => {
             Number(cityA.coordenada.latitud) > Number(cityB.coordenada.latitud) ? cityA.nombre : cityB.nombre;
 
         return buildQuestion(
-            `¿Qué ciudad está más al norte: ${cityA.nombre} o ${cityB.nombre}?`,
+            `¿Qué ciudad está más al norte: ${cityA.nombre} ${setConjuntion(cityB.nombre)} ${cityB.nombre}?`,
             "Escriba el nombre de la ciudad",
             correctAnswer,
             {
@@ -163,7 +179,7 @@ window.TextQuestion = (() => {
             Number(cityA.coordenada.latitud) < Number(cityB.coordenada.latitud) ? cityA.nombre : cityB.nombre;
 
         return buildQuestion(
-            `¿Qué ciudad está más al sur: ${cityA.nombre} o ${cityB.nombre}?`,
+            `¿Qué ciudad está más al sur: ${cityA.nombre} ${setConjuntion(cityB.nombre)} ${cityB.nombre}?`,
             "Escriba el nombre de la ciudad",
             correctAnswer,
             {
@@ -184,7 +200,7 @@ window.TextQuestion = (() => {
             Number(cityA.coordenada.longitud) > Number(cityB.coordenada.longitud) ? cityA.nombre : cityB.nombre;
 
         return buildQuestion(
-            `¿Qué ciudad está más al este respecto al meridiano de Greenwich: ${cityA.nombre} o ${cityB.nombre}?`,
+            `¿Qué ciudad está más al este respecto al meridiano de Greenwich: ${cityA.nombre} ${setConjuntion(cityB.nombre)} ${cityB.nombre}?`,
             "Escriba el nombre de la ciudad",
             correctAnswer,
             {
@@ -205,7 +221,7 @@ window.TextQuestion = (() => {
             Number(cityA.coordenada.longitud) < Number(cityB.coordenada.longitud) ? cityA.nombre : cityB.nombre;
 
         return buildQuestion(
-            `¿Qué ciudad está más al oeste respecto al meridiano de Greenwich: ${cityA.nombre} o ${cityB.nombre}?`,
+            `¿Qué ciudad está más al oeste respecto al meridiano de Greenwich: ${cityA.nombre} ${setConjuntion(cityB.nombre)} ${cityB.nombre}?`,
             "Escriba el nombre de la ciudad",
             correctAnswer,
             {
